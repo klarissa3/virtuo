@@ -191,6 +191,8 @@ function rental_price(cars,rentals)
 		//STEP 4 
 		if(driver.options.deductibleReduction){
 			driver.price += days * 4;
+			driver.commission.virtuo += days * 4;
+
 		}
 
 	});
