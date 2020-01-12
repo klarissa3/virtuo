@@ -167,7 +167,9 @@ function rental_price(cars,rentals)
 		var days = (new Date(driver.returnDate) - new Date(driver.pickupDate)) / 86400000 + 1;
 		for(const car of cars){
 			if(car.id == driver.carId){
+				//STEP 1 
 				driver.price = days * car.pricePerDay + driver.distance * car.pricePerKm;
+				//STEP 2
 				if(days > 1 && days < 5 ){
 					driver.price *= 0.9; 
 				}
@@ -180,10 +182,16 @@ function rental_price(cars,rentals)
 
 			}
 		}
+		//STEP 3
 		commission = driver.price * 0.3;
 		driver.commission.insurance = commission * 0.5 ;
 		driver.commission.treasury = days
 		driver.commission.virtuo = driver.commission.insurance - driver.commission.treasury;
+
+		//STEP 4 
+		if(driver.options.deductibleReduction){
+			driver.price += days * 4;
+		}
 
 	});
 
