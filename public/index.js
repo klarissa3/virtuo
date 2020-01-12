@@ -178,12 +178,12 @@ function rental_price(cars,rentals)
 					driver.price *= 0.5;
 				}
 
-				commission = driver.price * 0.7;
-				driver.commission.insurance = commission * 0.5 ;
-				driver.commission.treasury = days;
-				driver.commission.virtuo = commission * 0.5;
 			}
 		}
+		commission = driver.price * 0.3;
+		driver.commission.insurance = commission * 0.5 ;
+		driver.commission.treasury = days
+		driver.commission.virtuo = driver.commission.insurance - driver.commission.treasury;
 
 	});
 
