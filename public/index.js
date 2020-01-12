@@ -158,10 +158,11 @@ const actors = [{
   }]
 }];
 
-function rental_price(cars,rentals)
+function rental_price(cars,rentals,actors)
 {
 	var price = 0;
 	var commission = 0;
+	var i=0;
 
 	rentals.forEach((driver) => {
 		var days = (new Date(driver.returnDate) - new Date(driver.pickupDate)) / 86400000 + 1;
@@ -195,10 +196,18 @@ function rental_price(cars,rentals)
 
 		}
 
+		//STEP 5
+		actors[i].payment[0].amount = driver.price; 
+		actors[i].payment[1].amount = driver.price - commission; 
+		actors[i].payment[2].amount = driver.commission.insurance; 
+		actors[i].payment[3].amount = driver.commission.treasury; 
+		actors[i].payment[4].amount = driver.commission.virtuo; 
+		i++;
+
 	});
 
 }
-rental_price(cars,rentals);
+rental_price(cars,rentals,actors);
 console.log(cars);
 console.log(rentals);
 console.log(actors);
