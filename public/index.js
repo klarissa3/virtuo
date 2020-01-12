@@ -162,7 +162,7 @@ console.log(cars);
 console.log(rentals);
 console.log(actors);
 
-//STEP 1 :
+//STEP 1 & 2 :
 function rental_price(cars,rentals)
 {
 	var price = 0;
@@ -171,13 +171,20 @@ function rental_price(cars,rentals)
 		var days = (new Date(driver.returnDate) - new Date(driver.pickupDate)) / 86400000 + 1;
 		for(const car of cars){
 			if(car.id == driver.carId){
-				price = days * car.pricePerDay + driver.distance * car.pricePerKm;
+				driver.price = days * car.pricePerDay + driver.distance * car.pricePerKm;
 				console.log(days);
-				console.log("id :" + driver.id + " price :" + price);
+				if(days > 1 && days < 5 ){
+					driver.price *= 0.9; 
+				}
+				else if(days > 4 && days <11 ){
+					driver.price *= 0.7;
+				}
+				else if(days > 10 ){
+					driver.price *= 0.5;
+				}
+				console.log("id :" + driver.id + " price :" + driver.price);
 			}
-		}
-		
-
+		}		
 	});
 }
 rental_price(cars,rentals);
